@@ -133,7 +133,8 @@ def reflect_on_summary(state: SummaryState, config: RunnableConfig):
     follow_up_query = json.loads(result.content)
 
     # Overwrite the search query
-    return {"search_query": follow_up_query["follow_up_query"]}
+    override = {"search_query": follow_up_query.get("follow_up_query", follow_up_query)}
+    return override
 
 
 def finalize_summary(state: SummaryState):
